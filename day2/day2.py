@@ -1,6 +1,7 @@
 from typing import List, Tuple, Dict
 import sympy
 
+
 def is_invalid_pt1(id: int) -> bool:
     """
     Return true for an ID which is made only of some sequence of digits repeated twice.
@@ -18,31 +19,33 @@ def is_invalid_pt1(id: int) -> bool:
     left = id_str[:mid]
     right = id_str[mid:]
 
-    for l,r in zip(left, right):
+    for l, r in zip(left, right):
         if l != r:
             return False
 
     print(f"\tFound invalid ID: {id}")
     return True
 
+
 divisors_memo: Dict[int, List[int]] = {
     1: [1],
-    2: [1,2],
-    3: [1,3],
-    4: [1,2,4],
-    5: [1,5],
-    6: [1,2,3],
-    7: [1,7],
-    8: [1,2,4,8],
-    9: [1,3,9],
-    10: [1,2,5,10],
-    11: [1,11],
-    12: [1,2,3,4,6,12]
+    2: [1, 2],
+    3: [1, 3],
+    4: [1, 2, 4],
+    5: [1, 5],
+    6: [1, 2, 3],
+    7: [1, 7],
+    8: [1, 2, 4, 8],
+    9: [1, 3, 9],
+    10: [1, 2, 5, 10],
+    11: [1, 11],
+    12: [1, 2, 3, 4, 6, 12],
 }
+
 
 def get_combinations(id_str: str) -> List[Tuple[int, int]]:
     length = len(id_str)
-    combinations: List[Tuple[int,int]] = []
+    combinations: List[Tuple[int, int]] = []
     seen_factors = set()
 
     if length in divisors_memo:
@@ -57,6 +60,7 @@ def get_combinations(id_str: str) -> List[Tuple[int, int]]:
             seen_factors.add(d)
             seen_factors.add(length // d)
     return combinations
+
 
 def check_combination(id_str: str, sequence_length: int, repeats: int) -> bool:
     """
@@ -73,6 +77,7 @@ def check_combination(id_str: str, sequence_length: int, repeats: int) -> bool:
         return True
 
     return False
+
 
 def is_invalid_pt2(id: int) -> bool:
     """
@@ -100,9 +105,10 @@ def is_invalid_pt2(id: int) -> bool:
                 return True
     return False
 
+
 def find_invalid_ids(min: int, max: int, version: str = "2") -> List[int]:
     invalid_ids: List[int] = []
-    for id in range(min, max+1):
+    for id in range(min, max + 1):
         if version == "1" and is_invalid_pt1(id):
             invalid_ids.append(id)
         elif is_invalid_pt2(id):
@@ -125,6 +131,7 @@ def run(file: str) -> int:
         overall_sum += range_sum
 
     return overall_sum
+
 
 if __name__ == "__main__":
     file = "/Volumes/workplace/advent-of-code-2025/day2/input2.txt"
