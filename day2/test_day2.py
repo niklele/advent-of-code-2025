@@ -1,5 +1,12 @@
 import pytest
-from day2.day2 import *
+from day2.day2 import (
+    is_invalid_pt1,
+    is_invalid_pt2,
+    get_combinations,
+    check_combination,
+    find_invalid_ids,
+)
+from typing import List, Tuple
 
 
 def test_is_invalid_pt1():
@@ -7,7 +14,7 @@ def test_is_invalid_pt1():
     assert is_invalid_pt1(22)
 
     for i in range(12, 22):
-        assert is_invalid_pt1(i) == False
+        assert not is_invalid_pt1(i)
 
 
 @pytest.mark.parametrize(

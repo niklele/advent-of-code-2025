@@ -19,7 +19,7 @@ def is_invalid_pt1(id: int) -> bool:
     left = id_str[:mid]
     right = id_str[mid:]
 
-    for l, r in zip(left, right):
+    for l, r in zip(left, right):  # noqa: E741
         if l != r:
             return False
 
