@@ -1,5 +1,6 @@
 import os
 
+
 def find_max_joltage(bank: str) -> int:
     """
     Within each bank, you need to turn on exactly two batteries;
@@ -24,7 +25,7 @@ def find_max_joltage(bank: str) -> int:
 
     b_index = a_index + 1
     b = batteries[b_index]
-    for i, battery in enumerate(batteries[a_index+1:]):
+    for i, battery in enumerate(batteries[a_index + 1 :]):
         if battery > b:
             b_index = i
             b = battery
@@ -35,8 +36,8 @@ def find_max_joltage(bank: str) -> int:
 
     return total
 
-def run(file: str) -> int:
 
+def run(file: str) -> int:
     total = 0
     with open(file, "r") as f:
         for bank in f:
@@ -45,6 +46,7 @@ def run(file: str) -> int:
             total += find_max_joltage(bank)
 
     return total
+
 
 if __name__ == "__main__":
     file = "inputs/input3.txt"
