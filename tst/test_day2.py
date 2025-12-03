@@ -1,5 +1,5 @@
 import pytest
-from day2.day2 import (
+from src.day2 import (
     is_invalid_pt1,
     is_invalid_pt2,
     get_combinations,
