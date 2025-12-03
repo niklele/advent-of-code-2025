@@ -1,9 +1,23 @@
 import os
+from typing import List, Tuple
 
 
-def find_max_joltage(bank: str) -> int:
+def find_max_battery(batteries: List[int], start: int, end: int) -> Tuple[int, int]:
+    max_index = start
+    max_battery = batteries[max_index]
+
+    for i in range(start, end):
+        battery = batteries[i]
+        if battery > max_battery:
+            max_battery = battery
+            max_index = i
+
+    return max_index, max_battery
+
+
+def find_max_joltage(bank: str, N: int) -> int:
     """
-    Within each bank, you need to turn on exactly two batteries;
+    Within each bank, you need to turn on exactly N batteries;
     the joltage that the bank produces is equal to the number formed by the digits on the batteries you've turned on.
     For example, if you have a bank like 12345 and you turn on batteries 2 and 4,
     the bank would produce 24 jolts. (You cannot rearrange batteries.)
@@ -16,19 +30,8 @@ def find_max_joltage(bank: str) -> int:
     # A: largest number up to (not including) the last digit
     # B: largest number in the remaining digits
 
-    a_index = 0
-    a = batteries[a_index]
-    for i, battery in enumerate(batteries[:-1]):
-        if battery > a:
-            a = battery
-            a_index = i
-
-    b_index = a_index + 1
-    b = batteries[b_index]
-    for i, battery in enumerate(batteries[a_index + 1 :]):
-        if battery > b:
-            b_index = i
-            b = battery
+    a_index, a = find_max_battery(batteries, 0, len(batteries) - 1)
+    b_index, b = find_max_battery(batteries, a_index + 1, len(batteries))
 
     total = int(f"{a}{b}")
 
@@ -43,7 +46,7 @@ def run(file: str) -> int:
         for bank in f:
             bank = bank.strip("\n")
             print(f"Find max joltage for {bank}")
-            total += find_max_joltage(bank)
+            total += find_max_joltage(bank, N=2)
 
     return total
 
