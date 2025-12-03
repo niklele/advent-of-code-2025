@@ -134,7 +134,7 @@ def run(file: str) -> int:
 
 
 if __name__ == "__main__":
-    file = "/Volumes/workplace/advent-of-code-2025/day2/input2.txt"
-    # file = "/Volumes/workplace/advent-of-code-2025/day2/test.txt"
+    file = "input2.txt"
+    # file = "test2.txt"
     overall_sum = run(file)
     print(f"OVERALL RESULT: {overall_sum}")

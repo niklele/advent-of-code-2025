@@ -1,4 +1,4 @@
-from day1.day1 import Safe
+from day1 import Safe
 
 
 class TestDay1:

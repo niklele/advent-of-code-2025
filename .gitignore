@@ -208,6 +208,6 @@ __marimo__/
 
 
 # Advent of Code files
-*/instructions.md
-*/input*.txt
-*/test*.txt
+instructions*.md
+input*.txt
+test*.txt

@@ -16,8 +16,8 @@ python3 -m ruff format
 ## Run
 
 ```bash
-python3 ./day1/day1.py
-python3 ./day2/day2.py
+python3 ./day1.py
+python3 ./day2.py
 ```
 
 ## Unit tests
