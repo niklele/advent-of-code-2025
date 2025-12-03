@@ -1,3 +1,4 @@
+import os
 from typing import List, Tuple, Dict
 import sympy
 
@@ -134,7 +135,8 @@ def run(file: str) -> int:
 
 
 if __name__ == "__main__":
-    file = "input2.txt"
-    # file = "test2.txt"
-    overall_sum = run(file)
+    file = "inputs/input2.txt"
+    # file = "inputs/test2.txt"
+
+    overall_sum = run(os.path.join(os.getcwd(), file))
     print(f"OVERALL RESULT: {overall_sum}")

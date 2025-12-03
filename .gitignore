@@ -211,3 +211,4 @@ __marimo__/
 instructions*.md
 input*.txt
 test*.txt
+inputs/*
