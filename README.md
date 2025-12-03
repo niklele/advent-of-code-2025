@@ -7,10 +7,17 @@ Solutions for Advent of Code 2025 - https://adventofcode.com/2025
 source .venv/bin/activate
 ```
 
+## Formatting
+
+```bash
+python3 -m ruff format
+```
+
 ## Run
 
 ```bash
-./day1/day1.py
+python3 ./day1/day1.py
+python3 ./day2/day2.py
 ```
 
 ## Unit tests
@@ -19,8 +26,13 @@ source .venv/bin/activate
 python3 -m pytest
 ```
 
+## Linting
+
+```bash
+python3 -m ruff check --fix
+```
+
 ## TODO
 
 - [ ] fix VSCode launch and settings
 - [ ] reorganize project for later days
-- [ ] autoformatting, linting, etc

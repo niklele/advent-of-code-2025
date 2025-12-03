@@ -1,8 +1,7 @@
-import pytest
 from day1.day1 import Safe
 
-class TestDay1():
-    
+
+class TestDay1:
     def test_safe_single_rotations(self):
         safe = Safe()
         safe.rotate_left(40)
@@ -111,4 +110,3 @@ class TestDay1():
         safe.rotate_left(82)
         assert safe.curr == 32
         assert safe.zeros == 6
-
