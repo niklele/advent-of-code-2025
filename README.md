@@ -18,6 +18,7 @@ python3 -m ruff format
 ```bash
 python3 ./src/day1.py
 python3 ./src/day2.py
+python3 ./src/day3.py
 ```
 
 ## Unit tests
