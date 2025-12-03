@@ -22,20 +22,29 @@ def find_max_joltage(bank: str, N: int) -> int:
     For example, if you have a bank like 12345 and you turn on batteries 2 and 4,
     the bank would produce 24 jolts. (You cannot rearrange batteries.)
     """
+    assert len(bank) >= N, f"Must have at least {N} batteries in the bank"
 
     # convert from str to list of ints
     batteries = [int(b) for b in bank]
 
-    # To find the max joltage, we need to put together 2 numbers: AB
-    # A: largest number up to (not including) the last digit
-    # B: largest number in the remaining digits
+    # To find the max joltage, we need to put together N numbers: ABC..Z
+    # A: largest number up to (not including) the last digits B..Z
+    # B: largest number in the remaining digits, not including the last digits C..Z
+    # Z: largest number in the remaining digits
 
-    a_index, a = find_max_battery(batteries, 0, len(batteries) - 1)
-    b_index, b = find_max_battery(batteries, a_index + 1, len(batteries))
+    total: int = 0
+    last_index = -1
+    for i in range(N):
+        # Find the maximum value in the subset:
+        #  - start at one later than the last battery found
+        #  - end leaving room for the remaining batteries we have to add later
 
-    total = int(f"{a}{b}")
+        start = last_index + 1
+        end = len(batteries) - N + i + 1
+        last_index, last_value = find_max_battery(batteries, start, end)
 
-    print(f"\tturn on batteries {a_index} and {b_index} -> {total}")
+        # Put together the values into a single number
+        total += last_value * (10 ** (N - i - 1))
 
     return total
 
@@ -46,7 +55,8 @@ def run(file: str) -> int:
         for bank in f:
             bank = bank.strip("\n")
             print(f"Find max joltage for {bank}")
-            total += find_max_joltage(bank, N=2)
+            total += find_max_joltage(bank, N=12)
+            print(f"\t-> {total}")
 
     return total
 
