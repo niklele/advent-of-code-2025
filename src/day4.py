@@ -62,29 +62,34 @@ def cell_is_accessible(grid: List[List[str]], r: int, c: int) -> bool:
     if grid[r][c] == ROLL:
         neighbors = count_neighbors(grid, r, c)
         if neighbors < 4:
-            print(f"\t{r},{c} is accessible.")
+            # print(f"\t{r},{c} is accessible.")
             return True
         else:
-            print(f"\t{r},{c} is not accessible.")
+            # print(f"\t{r},{c} is not accessible.")
             return False
     else:
-        print(f"\t{r},{c} is empty.")
+        # print(f"\t{r},{c} is empty.")
         return False
 
 
-def run(file: str) -> int:
-    total = 0
-
+def parse_grid(file: str) -> List[List[str]]:
     grid: List[List[str]] = []
     with open(file, "r") as f:
         for line in f:
             line = line.strip("\n")
             row = [ch for ch in line]
             grid.append(row)
+    return grid
+
+
+def run(file: str) -> int:
+    total = 0
+
+    grid = parse_grid(file)
 
     for r, row in enumerate(grid):
         for c, value in enumerate(row):
-            print(f"Processing {r},{c}: {value}")
+            # print(f"Processing {r},{c}: {value}")
             if cell_is_accessible(grid, r, c):
                 total += 1
 
@@ -92,8 +97,8 @@ def run(file: str) -> int:
 
 
 if __name__ == "__main__":
-    file = "inputs/input4.txt"
-    # file = "inputs/test4.txt"
+    # file = "inputs/input4.txt"
+    file = "inputs/test4.txt"
 
     total = run(os.path.join(os.getcwd(), file))
     print(f"OVERALL RESULT: {total}")
