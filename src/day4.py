@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 import os
 
 EMPTY = "."
@@ -58,7 +58,7 @@ def count_neighbors(grid: List[List[str]], r: int, c: int) -> int:
     return count
 
 
-def cell_is_accessible(grid: List[List[str]], r: int, c: int) -> bool:
+def roll_is_accessible(grid: List[List[str]], r: int, c: int) -> bool:
     if grid[r][c] == ROLL:
         neighbors = count_neighbors(grid, r, c)
         if neighbors < 4:
@@ -82,23 +82,41 @@ def parse_grid(file: str) -> List[List[str]]:
     return grid
 
 
-def run(file: str) -> int:
+def collect_rolls(grid: List[List[str]]) -> int:
     total = 0
-
-    grid = parse_grid(file)
-
+    accessible_rolls: List[Tuple[int, int]] = []  # List[(row, col)]
     for r, row in enumerate(grid):
         for c, value in enumerate(row):
             # print(f"Processing {r},{c}: {value}")
-            if cell_is_accessible(grid, r, c):
+            if roll_is_accessible(grid, r, c):
                 total += 1
+                # Mark the roll for update after the run
+                accessible_rolls.append((r, c))
+
+    print(f"Found {total} accessible rolls, updating the grid.")
+    for r, c in accessible_rolls:
+        grid[r][c] = EMPTY
+
+    return total
+
+
+def collect_until_convergence(file: str) -> int:
+    total = 0
+
+    grid = parse_grid(file)
+    while True:
+        collected = collect_rolls(grid)
+        if not collected:
+            print("No more rolls are accessible.")
+            break
+        total += collected
 
     return total
 
 
 if __name__ == "__main__":
-    # file = "inputs/input4.txt"
-    file = "inputs/test4.txt"
+    file = "inputs/input4.txt"
+    # file = "inputs/test4.txt"
 
-    total = run(os.path.join(os.getcwd(), file))
+    total = collect_until_convergence(os.path.join(os.getcwd(), file))
     print(f"OVERALL RESULT: {total}")
