@@ -35,5 +35,4 @@ python3 -m ruff check --fix
 
 ## TODO
 
-- [ ] fix VSCode launch and settings
-- [ ] reorganize project for later days
+- fix VSCode launch and settings
