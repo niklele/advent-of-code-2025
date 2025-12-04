@@ -1,13 +1,11 @@
-from src.day4 import parse_grid, check
+from src.day4 import check, ROLL, EMPTY
 from typing import List
 import pytest
-import os
 
 
 @pytest.fixture
 def test_grid() -> List[List[str]]:
-    base = os.path.dirname(os.path.realpath(__file__))
-    return parse_grid(os.path.join(base, "../inputs/input4.txt"))
+    return [[EMPTY, EMPTY, ROLL], [EMPTY, ROLL, ROLL], [ROLL, EMPTY, EMPTY]]
 
 
 @pytest.mark.parametrize(
